@@ -1,0 +1,87 @@
+{% extends "web/base.html" %}
+
+{% block mainbody %}
+    <div class="page-header">
+        <h1>
+            Batch 列表
+        </h1>
+    </div>
+
+    {#    <button type="button" onclick="loadXMLDoc()">修改内容</button>#}
+
+    <table id="simple-table" class="table  table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>path</th>
+            <th>file</th>
+            <th>desc</th>
+            <th>task</th>
+            <th>input</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+        {% for l in entitys %}
+            <tr>
+                <td>
+                    {{ l.path }}
+                </td>
+                <td>
+                    {{ l.fname }}
+                </td>
+
+                <td>
+                    {% for t in l.desc %}
+                        #. {{ t }}
+                        <br>
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for t in l.desc_task %}
+                        #. {{ t }}
+                        <br>
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for t in l.desc_input %}
+                        #. {{ t }}
+                        <br>
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+{% endblock %}
+
+{% block script %}
+
+    <script type="text/javascript">
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                xhr.setRequestHeader("X-CSRFtoken", $.cookie("csrftoken"))
+            }
+        });
+
+        $("#btn").click(function () {
+            $.ajax({
+                url: "test/post",
+                type: 'POST',
+                data: {
+                    "vendorItemId": "vendorItemId"
+                },
+                success: function (data) {
+                    alert(data);
+                    $('#xxx').val(1000)
+                }
+            });
+        })
+    </script>
+
+
+{% endblock %}

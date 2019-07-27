@@ -1,0 +1,52 @@
+{% extends "web/base.html" %}
+
+{% block mainbody %}
+    <div class="page-header">
+        <h1>
+            Batch 执行状态
+        </h1>
+    </div>
+
+    {#    <button type="button" onclick="loadXMLDoc()">修改内容</button>#}
+
+    <div class="well">
+        <h4 class="smaller ">状态说明</h4>
+        只显示最近的执行的flow，失败的状态会标红处理
+    </div>
+
+    <div>
+        {% for l in data %}
+            <div>
+                <div class="well">
+                    {% for l_element in l %}
+                        {% if l_element == "exec_fail" %}
+                            <a href="#" id="id-btn-dialog2" class="btn btn-danger btn-sm">{{ l_element }}</a>
+                        {% elif l_element == "success" %}
+                            <a href="#" id="id-btn-dialog2" class="btn btn-info btn-sm">{{ l_element }}</a>
+                        {% elif l_element == "idle" %}
+                            <a href="#" id="id-btn-dialog2" class="btn btn-grey btn-sm">{{ l_element }}</a>
+                        {% else %}
+                            <a href="#" id="id-btn-dialog2" class="btn btn-default btn-sm">{{ l_element }}</a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript">
+
+        $("#myDiv").click(function () {
+            alert("dfjksaljf");
+            $.ajax({
+                url: "/kafka/producer",
+                type: 'GET',
+            });
+        })
+    </script>
+
+
+{% endblock %}

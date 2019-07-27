@@ -1,0 +1,9 @@
+{% extends "web/base.html" %}
+
+{% block mainbody %}
+    <form action="/search-post" method="post">
+        {% csrf_token %}
+        <input type="text" name="q">
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}
