@@ -6,7 +6,7 @@ class RudiInspectorFileEntity:
         self._base_path = base_path
         self._path, self._fname = os.path.split(path)
         self._path = str(self.path).replace(base_path, "")
-        self._desc, self._desc_task, self.desc_input, self._max_l, self._content = self.set_attr(path)
+        self._desc, self._desc_task, self.desc_input,self.desc_note, self._max_l, self._content = self.set_attr(path)
 
     @property
     def base_path(self):
@@ -35,6 +35,7 @@ class RudiInspectorFileEntity:
     def set_attr(self, path):
         desc_input = []
         desc_task = []
+        desc_note= []
         descs = []
         with open(path)  as f:
             line = f.readline
@@ -49,13 +50,16 @@ class RudiInspectorFileEntity:
                 if l.startswith("# input "):
                     desc = l[8:].strip("\n")
                     desc_input.append(desc)
+                if l.startswith("# note "):
+                    desc = l[7:].strip("\n")
+                    desc_note.append(desc)
                 line = f.readline()
                 desc = ""
-        max_l = max(len(desc_input), len(desc_task), len(descs))
+        max_l = max(len(desc_input), len(desc_task), len(descs),len(desc_note))
 
         with open(path) as f:
             content = f.read()
-        return descs, desc_task, desc_input, max_l, content
+        return descs, desc_task, desc_input,desc_note, max_l, content
 
 
 class RudiInspectorFileManager:

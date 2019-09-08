@@ -17,6 +17,7 @@
             <th>desc</th>
             <th>task</th>
             <th>input</th>
+            <th>note</th>
         </tr>
         </thead>
 
@@ -46,6 +47,12 @@
                 </td>
                 <td>
                     {% for t in l.desc_input %}
+                        #. {{ t }}
+                        <br>
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for t in l.desc_note %}
                         #. {{ t }}
                         <br>
                     {% endfor %}

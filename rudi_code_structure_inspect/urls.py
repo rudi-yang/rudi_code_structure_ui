@@ -21,6 +21,7 @@ from module_inspect.views import homepage, inspector_home
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', homepage),
+    path('homepage', homepage),
 
     # code inspector
     path('inspector', inspector_home)
